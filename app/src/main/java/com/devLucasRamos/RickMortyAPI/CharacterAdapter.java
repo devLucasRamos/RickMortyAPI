@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.ViewHolder> {
 
-    private final List<Character> characters;
+    private List<Character> characters;
 
     public CharacterAdapter(List<Character> characters) {
         this.characters = characters;
