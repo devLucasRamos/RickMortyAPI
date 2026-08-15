@@ -5,10 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.List;
+import android.content.Context;
 
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.ViewHolder> {
 
@@ -33,7 +35,30 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
         holder.tvStatus.setText("Status: " + character.getStatus());
         holder.tvSpecies.setText("Especie: " + character.getSpecies());
 
-        Glide.with(holder.itemView.getContext()).load(character.getImage()).into(holder.ivCharacter);
+        Context context = holder.itemView.getContext();
+        int colorStatus;
+
+        if ("Alive".equalsIgnoreCase(character.getStatus())) {
+            colorStatus = R.color.status_alive;
+        }
+
+        else if ("Dead".equalsIgnoreCase(character.getStatus())) {
+            colorStatus = R.color.status_dead;
+        }
+
+        else {
+            colorStatus = R.color.status_unknown;
+        }
+
+        int colorHolder = androidx.core.content.ContextCompat.getColor(context, colorStatus);
+
+        androidx.core.view.ViewCompat.setBackgroundTintList(
+                holder.tvStatus,
+                android.content.res.ColorStateList.valueOf(colorHolder)
+        );
+
+        Glide.with(holder.itemView.getContext()).load(character.getImage()).circleCrop().into(holder.ivCharacter);
+
     }
 
     @Override

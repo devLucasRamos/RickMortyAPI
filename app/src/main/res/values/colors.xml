@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="bg_dark">#0B0F14</color>
+    <color name="card_dark">#151B23</color>
+    <color name="text_primary">#F5F7FA</color>
+    <color name="text_secondary">#9AA5B1</color>
+    <color name="accent">#62E0A0</color>
+    <color name="status_alive">#2ECC71</color>
+    <color name="status_dead">#E74C3C</color>
+    <color name="status_unknown">#7F8C8D</color>
+    <color name="divider">#1F2A37</color>
 </resources>
