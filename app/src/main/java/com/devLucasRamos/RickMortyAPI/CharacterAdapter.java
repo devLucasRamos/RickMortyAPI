@@ -30,14 +30,13 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Character character = characters.get(position);
+        Context context = holder.itemView.getContext();
 
         holder.tvName.setText(character.getName());
-        holder.tvStatus.setText("Status: " + character.getStatus());
-        holder.tvSpecies.setText("Especie: " + character.getSpecies());
+        String status = character.getStatus();
+        holder.tvStatus.setText(status);
 
-        Context context = holder.itemView.getContext();
         int colorStatus;
-
         if ("Alive".equalsIgnoreCase(character.getStatus())) {
             colorStatus = R.color.status_alive;
         }
@@ -57,6 +56,19 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
                 android.content.res.ColorStateList.valueOf(colorHolder)
         );
 
+        String speciesText = "Espécie: " + character.getSpecies();
+        if (!character.getType().isEmpty()) {
+            speciesText += " - " + character.getType();
+        }
+
+        holder.tvSpecies.setText(speciesText);
+
+        holder.tvInfoLine.setText("Gênero: " + character.getGender() + "  -  " + character.getEpisodeCount() + " episódios");
+
+        String locationText = "Local: " + character.getLocationName() + "\nOrigem: " + character.getOriginName();
+
+        holder.tvLocation.setText(locationText);
+
         Glide.with(holder.itemView.getContext()).load(character.getImage()).circleCrop().into(holder.ivCharacter);
 
     }
@@ -71,7 +83,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivCharacter;
-        TextView tvName, tvStatus, tvSpecies;
+        TextView tvName, tvStatus, tvSpecies, tvInfoLine, tvLocation;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,6 +91,8 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
             tvName = itemView.findViewById(R.id.tvName);
             tvStatus = itemView.findViewById(R.id.tvStatus);
             tvSpecies = itemView.findViewById(R.id.tvSpecies);
+            tvInfoLine = itemView.findViewById(R.id.tvInfoLine);
+            tvLocation = itemView.findViewById(R.id.tvLocation);
         }
     }
 }
