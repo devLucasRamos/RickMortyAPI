@@ -1,4 +1,4 @@
-package com.devLucasRamos.RickMortyAPI;
+package com.devLucasRamos.RickMortyAPI.ui;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +9,13 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.devLucasRamos.RickMortyAPI.data.remote.ApiService;
+import com.devLucasRamos.RickMortyAPI.data.model.Character;
+import com.devLucasRamos.RickMortyAPI.ui.adapter.CharacterAdapter;
+import com.devLucasRamos.RickMortyAPI.data.model.CharacterResponse;
+import com.devLucasRamos.RickMortyAPI.R;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

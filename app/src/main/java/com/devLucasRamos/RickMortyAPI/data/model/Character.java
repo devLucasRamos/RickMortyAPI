@@ -1,4 +1,4 @@
-package com.devLucasRamos.RickMortyAPI;
+package com.devLucasRamos.RickMortyAPI.data.model;
 
 import java.util.List;
 

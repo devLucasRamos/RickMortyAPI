@@ -1,4 +1,4 @@
-package com.devLucasRamos.RickMortyAPI;
+package com.devLucasRamos.RickMortyAPI.ui.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.devLucasRamos.RickMortyAPI.data.model.Character;
+import com.devLucasRamos.RickMortyAPI.R;
+
 import java.util.List;
 import android.content.Context;
 

@@ -1,9 +1,9 @@
-package com.devLucasRamos.RickMortyAPI;
+package com.devLucasRamos.RickMortyAPI.data.model;
 
 import java.util.List;
 
 public class CharacterResponse {
-    private List<Character> results;
+    private List<com.devLucasRamos.RickMortyAPI.data.model.Character> results;
     private Info info;
 
     public List<Character> getResults() {
