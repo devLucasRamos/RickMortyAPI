@@ -2,27 +2,27 @@ package com.devLucasRamos.RickMortyAPI.ui;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
-import android.widget.TextView;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.devLucasRamos.RickMortyAPI.data.remote.ApiService;
-import com.devLucasRamos.RickMortyAPI.data.model.Character;
-import com.devLucasRamos.RickMortyAPI.ui.adapter.CharacterAdapter;
-import com.devLucasRamos.RickMortyAPI.data.model.CharacterResponse;
 import com.devLucasRamos.RickMortyAPI.R;
+import com.devLucasRamos.RickMortyAPI.data.model.Character;
+import com.devLucasRamos.RickMortyAPI.data.model.CharacterResponse;
+import com.devLucasRamos.RickMortyAPI.data.repository.CharacterRepository;
+import com.devLucasRamos.RickMortyAPI.ui.adapter.CharacterAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentPage = 1;
     private int totalPages = 1;
 
-    private ApiService apiService;
+    private CharacterRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +54,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new CharacterAdapter(characterList);
         recyclerView.setAdapter(adapter);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://rickandmortyapi.com/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        apiService = retrofit.create(ApiService.class);
+        repository = new CharacterRepository();
 
         carregarPersonagens(currentPage);
 
@@ -81,9 +76,7 @@ public class MainActivity extends AppCompatActivity {
     private void carregarPersonagens(int page) {
         progressBar.setVisibility(View.VISIBLE);
 
-        Call<CharacterResponse> call = apiService.getCharacters(page);
-
-        call.enqueue(new Callback<CharacterResponse>() {
+        repository.getCharacters(page).enqueue(new Callback<CharacterResponse>() {
             @Override
             public void onResponse(Call<CharacterResponse> call, Response<CharacterResponse> response) {
                 progressBar.setVisibility(View.GONE);
